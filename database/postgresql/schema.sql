@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS reviews CASCADE;
+
+CREATE TYPE noise AS ENUM ('Quiet', 'Moderate', 'Energetic');
+
+CREATE TABLE restaurants (
+  id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE users (
+  id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  initials VARCHAR(5) NOT NULL,
+  location VARCHAR(50) NOT NULL,
+  icon_color VARCHAR(7) NOT NULL,
+  vip BOOLEAN NOT NULL
+);
+
+CREATE TABLE reviews (
+  id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  userID INT NOT NULL REFERENCES users(id),
+  restaurantID INT NOT NULL REFERENCES restaurants(id),
+  review TEXT NOT NULL,
+  overall SMALLINT NOT NULL,
+  food SMALLINT NOT NULL,
+  service SMALLINT NOT NULL,
+  ambience SMALLINT NOT NULL,
+  value SMALLINT NOT NULL,
+  noiseLevel noise NOT NULL,
+  recommendation BOOLEAN NOT NULL,
+  date DATE NOT NULL
+);
+
+CREATE INDEX restaurantID ON reviews (restaurantID);
+CREATE INDEX userID ON reviews (userID);

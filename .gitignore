@@ -24,3 +24,8 @@ coverage
 build/
 dist/
 
+# pem key
+Reviews.pem
+
+# csv files
+*.csv

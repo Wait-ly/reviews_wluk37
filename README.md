@@ -37,3 +37,34 @@ npm install -g webpack
 npm install
 ```
 
+## CRUD API Routes
+
+'GET': /api/listings/:restaurantID/reviews
+  - finds all reviews for a particular restaurant
+  - returns:
+  {
+    id: Number,
+    userID: Number,
+    restaurantID: Number,
+    review: String,
+    overall: Number,
+    food: Number,
+    service: Number,
+    ambience: Number,
+    value: Number,
+    noiseLevel: String,
+    recommendation: Boolean,
+    date: Date
+  }
+
+'POST': /api/listings/:restaurantID/reviews
+  - posts a new review for a particular restaurant
+  - returns if operation was successful
+
+'PUT': /api/listings/:restaurantID/reviews/:reviewID
+  - updates a review for a particular restaurant
+  - returns if operation was successful
+
+'DELETE': /api/:restaurantID/reviews/:reviewID
+  - deletes a review for a particular restaurant
+  - returns if operation was successful
