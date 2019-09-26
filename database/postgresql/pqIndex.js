@@ -1,7 +1,9 @@
 const { Pool } = require('pg');
 const pool = new Pool({
-  host: 'localhost',
-  database: 'reviews'
+  host: '18.225.32.180',
+  database: 'postgres',
+  username: 'wluk37',
+  password: 'lukluk123'
 });
 
 pool.connect(function(err) {
@@ -9,7 +11,7 @@ pool.connect(function(err) {
     console.log('error: ', err);
     return;
   } else {
-    console.log('connection success!')
+    console.log('connection success!');
   }
 });
 
