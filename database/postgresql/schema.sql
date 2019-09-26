@@ -19,7 +19,7 @@ CREATE TABLE users (
 CREATE TABLE reviews (
   id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   userID INT NOT NULL REFERENCES users(id),
-  restaurantID INT NOT NULL REFERENCES restaurants(id),
+  restaurantID INT NOT NULL,
   review TEXT NOT NULL,
   overall SMALLINT NOT NULL,
   food SMALLINT NOT NULL,
@@ -31,5 +31,6 @@ CREATE TABLE reviews (
   date DATE NOT NULL
 );
 
-CREATE INDEX restaurantID ON reviews (restaurantID);
-CREATE INDEX userID ON reviews (userID);
+-- CREATE INDEX restaurantID ON reviews (restaurantID);
+-- CREATE INDEX userID ON reviews (userID);
+

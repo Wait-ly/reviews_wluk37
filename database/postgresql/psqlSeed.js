@@ -10,6 +10,7 @@ const fakeLocation = () => faker.address.city();
 const fakeRestaurant = () => faker.company.bsBuzz();
 
 // create restaurant
+// \COPY restaurants(name) FROM '' DELIMITER ',' CSV;
 const generateRestaurant = () => {
   const rows = {};
   let restaurant = '';
@@ -23,7 +24,10 @@ const generateRestaurant = () => {
   return restaurant += '\n';
 };
 
+
+
 // create user
+// \COPY users(username, initials, location, icon_color, vip) FROM '' DELIMITER ',' CSV;
 const generateUser = () => {
   const backgroundColors = ['#1ECBE1', '#961EE1', '#E1341E', '#6AE11E'];
   const rows = {};
@@ -43,6 +47,7 @@ const generateUser = () => {
 };
 
 // create review
+// \COPY reviews(userID, restaurantID, review, overall, food, service, ambience, value, noiseLevel, recommendation, date) FROM '' DELIMITER ',' CSV;
 const generateReview = () => {
   const noise = ['Quiet', 'Moderate', 'Energetic'];
   const rows = {};
@@ -90,6 +95,6 @@ const createCSV = (writer, data, encoding, cb, repeats) => {
   write();
 };
 
-// createCSV(fs.createWriteStream('./database/postgresql/seedReviews.csv'), generateReview, 'utf-8', () => fs.createWriteStream('./database/postgresql/seedReviewsss.csv').end(), 100);
-// createCSV(fs.createWriteStream('./database/postgresql/seedRestaurants.csv'), generateRestaurant, 'utf-8', () => fs.createWriteStream('./database/postgresql/seedRestaurantss.csv').end(), 1000000);
+createCSV(fs.createWriteStream('./database/postgresql/seedReviews.csv'), generateReview, 'utf-8', () => fs.createWriteStream('./database/postgresql/seedReviewsss.csv').end(), 100);
+createCSV(fs.createWriteStream('./database/postgresql/seedRestaurants.csv'), generateRestaurant, 'utf-8', () => fs.createWriteStream('./database/postgresql/seedRestaurantss.csv').end(), 1000000);
 createCSV(fs.createWriteStream('./database/postgresql/seedUsers.csv'), generateUser, 'utf-8', () => fs.createWriteStream('./database/postgresql/seedUserss.csv').end(), 1000000);
