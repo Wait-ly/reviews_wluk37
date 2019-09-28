@@ -9,7 +9,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['wait.ly ec2 instance2'],
+  app_name: ['wait.ly ec2 instance3'],
   /**
    * Your New Relic license key.
    */

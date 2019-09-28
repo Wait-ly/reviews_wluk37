@@ -178,7 +178,7 @@ class App extends React.Component {
     let id = document.URL.split('/')
     id = id[id.length - 2]
 
-    axios.get(`http://3.19.73.107:3003/api/listing/${id}/reviews`)
+    axios.get(`http://3.19.27.146:3003/api/listing/${id}/reviews`)
     .then((response) => {
       this.setState({
         reviews: response.data
