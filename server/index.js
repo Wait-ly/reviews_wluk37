@@ -2,7 +2,7 @@ require('newrelic');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const db = require('../database/index.js');
+// const db = require('../database/index.js');
 const path = require('path');
 const compression = require('compression');
 const pgdb = require('../database/postgresql/pqIndex.js');
@@ -10,6 +10,7 @@ const PORT = 3003;
 
 
 app.use(express.static('public'));
+app.use('/listing/:restaurantID', express.static('public'));
 
 app.use(bodyParser.json());
 
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
 
 
 // CREATE a review
-app.post('/api/:restaurantID/reviews', (req, res) => {
+app.post('/api/listing/:restaurantID/reviews', (req, res) => {
   const { userID, restaurantID, review, overall, food, service, ambience, value, noiseLevel, recommendation, date } = req.body;
   const input = `INSERT INTO reviews (userID, restaurantID, review, overall, food, service, ambience, value, noiseLevel, recommendation, date) VALUES ${userID}, ${restaurantID}. ${review}, ${overall}, ${food}, ${service}, ${ambience}, ${value}, ${noiseLevel}, ${recommendation}, ${date};`;
   pgdb.query(input);
@@ -30,7 +31,7 @@ app.post('/api/:restaurantID/reviews', (req, res) => {
 });
 
 // READ all reviews
-app.get('/api/:restaurantID/reviews', (req, res) => {
+app.get('/api/listing/:restaurantID/reviews', (req, res) => {
   let id = req.params.restaurantID;
   let input = `SELECT * FROM users JOIN reviews ON reviews.restaurantID=${id} AND reviews.userID = users.id;`;
   
@@ -77,7 +78,7 @@ app.get('/api/:restaurantID/reviews', (req, res) => {
 // });
 
 // UPDATE a review
-app.put('/api/:restaurantID/reviews/:reviewID', (req, res) => {
+app.put('/api/listing/:restaurantID/reviews/:reviewID', (req, res) => {
   let restID = req.params.restaurantID.slice(1);
   let revID = req.params.reviewID;
   let input = `UPDATE reviews SET review = ${req.body.review} FROM reviews WHERE restaurantID = ${restID} AND id = ${revID};`;
@@ -92,7 +93,7 @@ app.put('/api/:restaurantID/reviews/:reviewID', (req, res) => {
 });
 
 // DELETE a review
-app.delete('/api/:restaurantID/reviews/:reviewID', (req, res) => {
+app.delete('/api/listing/:restaurantID/reviews/:reviewID', (req, res) => {
   let restID = req.params.restaurantID.slice(1);
   let revID = req.params.reviewID;
   let input = `DELETE FROM reviews WHERE restaurantID = ${restID} AND id = ${revID}`;
